@@ -43,6 +43,19 @@ const teamSchema = new Schema(
   { timestamps: true }
 )
 
+// virtuals
+teamSchema.virtual("totalMatches").get(function () {
+  return this.stats.test.matchesPlayed + this.stats.odi.matchesPlayed + this.stats.t20i.matchesPlayed
+})
+
+teamSchema.virtual("totalWins").get(function () {
+  return this.stats.test.won + this.stats.odi.won + this.stats.t20i.won
+})
+
+teamSchema.virtual("totalLosses").get(function () {
+  return this.stats.test.lost + this.stats.odi.lost + this.stats.t20i.lost
+})
+
 const TeamModel = model("team", teamSchema)
 
 module.exports = TeamModel

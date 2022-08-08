@@ -2,7 +2,7 @@ const express = require("express")
 const cors = require("cors")
 const { default: helmet } = require("helmet")
 const morgan = require("morgan")
-const api = require("./api")
+const api = require("./api/api")
 
 const app = express()
 
