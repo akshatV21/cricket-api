@@ -48,7 +48,7 @@ const httpGetTeamWithMostWins = async (req, res) => {
   teams.sort((a, b) => b["stats"][req.format]["won"] - a["stats"][req.format]["won"])
 
   const mostMatchesByTeamArray = teams.map(team => {
-    const { countryName, cricketBoard, _id, ...rest } = team._doc
+    const { countryName, cricketBoard, _id } = team._doc
     return { countryName, cricketBoard, [`${req.format}Wins`]: team["stats"][req.format]["won"], _id }
   })
   return res.status(200).json({ teams: mostMatchesByTeamArray })
