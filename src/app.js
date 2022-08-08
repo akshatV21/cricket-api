@@ -2,6 +2,7 @@ const express = require("express")
 const cors = require("cors")
 const { default: helmet } = require("helmet")
 const morgan = require("morgan")
+const api = require("./api")
 
 const app = express()
 
@@ -12,5 +13,6 @@ app.use(morgan("dev"))
 app.use(express.json())
 
 // router
+app.use("/api", api)
 
 module.exports = app
