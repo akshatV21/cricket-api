@@ -7,6 +7,6 @@ mongoose.connect("mongodb+srv://akshat21:aku1985pika@cluster0.ew0oz.mongodb.net/
 
 mongoose.connection.on("connected", () => {
   app.listen(PORT, () => {
-    console.on("Listening to requests: http://localhost:8080/")
+    console.log("Listening to requests: http://localhost:8080/")
   })
 })
