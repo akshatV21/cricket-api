@@ -1,57 +1,40 @@
 const TeamModel = require("../models/team-model")
+const { getFormattedTeams, getFormattedTeamsByFormat } = require("../helpers/record-helpers")
 
-// --------------------------------------------------------------------------------------------------------------------
 // most matches played
 const httpGetTeamWithMostMatches = async (req, res) => {
+  const format = req.format
   const teams = await TeamModel.find()
 
-  // when format is not specified
-  if (req.format === "all") {
+  if (format === "all") {
     teams.sort((a, b) => b["totalMatches"] - a["totalMatches"])
-
-    const mostMatchesByTeamArray = teams.map(team => {
-      const { countryName, cricketBoard, _id } = team._doc
-      return { countryName, cricketBoard, totalMatches: team.totalMatches, _id }
-    })
-
-    return res.status(200).json({ teams: mostMatchesByTeamArray })
+    const finalTeamsArray = getFormattedTeams(teams, "Matches")
+    return res.status(200).json(finalTeamsArray)
   }
 
-  // when format is specified
-  teams.sort((a, b) => b["stats"][req.format]["matchesPlayed"] - a["stats"][req.format]["matchesPlayed"])
-
-  const mostMatchesByTeamArray = teams.map(team => {
-    const { countryName, cricketBoard, _id } = team._doc
-    return { countryName, cricketBoard, [`${req.format}Matches`]: team["stats"][req.format]["matchesPlayed"], _id }
-  })
-  return res.status(200).json({ teams: mostMatchesByTeamArray })
+  if (format !== "all") {
+    teams.sort((a, b) => b["stats"][req.format]["matchesPlayed"] - a["stats"][req.format]["matchesPlayed"])
+    const finalTeamsArray = getFormattedTeamsByFormat(teams, format, "Matches")
+    return res.status(200).json(finalTeamsArray)
+  }
 }
 
-// --------------------------------------------------------------------------------------------------------------------
 // most wins
 const httpGetTeamWithMostWins = async (req, res) => {
+  const format = req.format
   const teams = await TeamModel.find()
 
-  // when format is not specified
   if (req.format === "all") {
     teams.sort((a, b) => b["totalWins"] - a["totalWins"])
-
-    const mostWinsByTeamArray = teams.map(team => {
-      const { countryName, cricketBoard, _id, ...rest } = team._doc
-      return { countryName, cricketBoard, totalWins: team.totalWins, _id }
-    })
-
-    return res.status(200).json({ teams: mostWinsByTeamArray })
+    const finalTeamsArray = getFormattedTeams(teams, "Wins")
+    return res.status(200).json(finalTeamsArray)
   }
 
-  // when format is specified
-  teams.sort((a, b) => b["stats"][req.format]["won"] - a["stats"][req.format]["won"])
-
-  const mostMatchesByTeamArray = teams.map(team => {
-    const { countryName, cricketBoard, _id } = team._doc
-    return { countryName, cricketBoard, [`${req.format}Wins`]: team["stats"][req.format]["won"], _id }
-  })
-  return res.status(200).json({ teams: mostMatchesByTeamArray })
+  if (format !== "all") {
+    teams.sort((a, b) => b["stats"][req.format]["won"] - a["stats"][req.format]["won"])
+    const finalTeamsArray = getFormattedTeamsByFormat(teams, format, "Won")
+    return res.status(200).json(finalTeamsArray)
+  }
 }
 
 module.exports = { httpGetTeamWithMostMatches, httpGetTeamWithMostWins }
