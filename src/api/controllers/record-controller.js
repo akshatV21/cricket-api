@@ -70,7 +70,8 @@ const httpGetTeamsWithMostLosses = async (req, res) => {
   }
 }
 
-const httpGetEarlisetTeams = async (req, res) => {
+// earliest teams
+const httpGetEarliestTeams = async (req, res) => {
   try {
     const teams = await TeamModel.find({}, "countryName countryCode cricketBoard fullMember")
     teams.sort((a, b) => a.fullMember["since"] - b.fullMember["since"])
@@ -85,4 +86,4 @@ const httpGetEarlisetTeams = async (req, res) => {
   }
 }
 
-module.exports = { httpGetTeamsWithMostMatches, httpGetTeamsWithMostWins, httpGetTeamsWithMostLosses }
+module.exports = { httpGetTeamsWithMostMatches, httpGetTeamsWithMostWins, httpGetTeamsWithMostLosses, httpGetEarliestTeams }

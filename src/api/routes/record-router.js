@@ -1,5 +1,10 @@
 const { Router } = require("express")
-const { httpGetTeamsWithMostWins, httpGetTeamsWithMostMatches, httpGetTeamsWithMostLosses } = require("../controllers/record-controller")
+const {
+  httpGetTeamsWithMostWins,
+  httpGetTeamsWithMostMatches,
+  httpGetTeamsWithMostLosses,
+  httpGetEarliestTeams,
+} = require("../controllers/record-controller")
 const { validateFormatParameter } = require("../middlewares/record-middlewares")
 
 const recordRouter = Router()
@@ -11,6 +16,6 @@ recordRouter.get("/teams/mostWins", validateFormatParameter, httpGetTeamsWithMos
 
 recordRouter.get("/teams/mostLosses", validateFormatParameter, httpGetTeamsWithMostLosses)
 
-recordRouter.get("/teams/earliestTeams")
+recordRouter.get("/teams/earliestTeams", httpGetEarliestTeams)
 
 module.exports = recordRouter
