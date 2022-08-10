@@ -1,0 +1,15 @@
+name: cricket-api CI
+on:
+  push:
+    branches: [beta]
+  pull_request:
+    branches: [master]
+jobs:
+  install:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.14'
+      - run: npm install
