@@ -52,7 +52,7 @@ teamSchema.virtual("totalWins").get(function () {
   return this.stats.test.won + this.stats.odi.won + this.stats.t20i.won
 })
 
-teamSchema.virtual("totalLosses").get(function () {
+teamSchema.virtual("totalLost").get(function () {
   return this.stats.test.lost + this.stats.odi.lost + this.stats.t20i.lost
 })
 

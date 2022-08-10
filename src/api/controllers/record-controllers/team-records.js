@@ -1,5 +1,5 @@
-const TeamModel = require("../models/team-model")
-const { getFormattedTeams, getFormattedTeamsByFormat } = require("../helpers/record-helpers")
+const TeamModel = require("../../models/team-model")
+const { getFormattedTeams, getFormattedTeamsByFormat } = require("../../helpers/record-helpers")
 
 // most matches played
 const httpGetTeamsWithMostMatches = async (req, res) => {
