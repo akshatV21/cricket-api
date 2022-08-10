@@ -7,7 +7,7 @@ const checkFormatParamter = (req, res, next) => {
   const validValues = ["test", "odi", "t20i"]
   formatArray.forEach(format => {
     if (!validValues.includes(format)) {
-      return res.status(400).json({ error: `Ivalid format - ${format}` })
+      return res.status(400).json({ error: `Invalid format - ${format}` })
     }
   })
 

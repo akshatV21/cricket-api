@@ -3,6 +3,7 @@ const { Schema, model } = require("mongoose")
 const teamSchemaForRankings = {
   rank: Number,
   points: Number,
+  rating: Number,
   team: {
     name: String,
     short: String,
@@ -12,6 +13,7 @@ const teamSchemaForRankings = {
 // main schema
 const teamRankingsSchema = new Schema(
   {
+    rankingsFor: String,
     format: String,
     rankings: [teamSchemaForRankings],
   },
