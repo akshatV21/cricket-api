@@ -4,7 +4,7 @@ const {
   httpGetTeamsWithMostMatches,
   httpGetTeamsWithMostLosses,
   httpGetEarliestTeams,
-} = require("../controllers/record-controller")
+} = require("../controllers/record-controllers/team-records")
 const { validateFormatParameter } = require("../middlewares/record-middlewares")
 
 const recordRouter = Router()
