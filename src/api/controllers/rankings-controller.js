@@ -1,14 +1,11 @@
 const TeamRankingsModel = require("../models/ranking-models/team-ranking-model")
+const PlayerRankingsModel = require("../models/ranking-models/player-ranking-model")
 
 const httpGetTeamRankings = async (req, res) => {
   try {
-    // check format
-    const format = req.query.format
-    const validFormats = ["odi", "test", "t20i"]
-    if (!format) return res.status(400).json({ error: "format is required!" })
-    if (!validFormats.includes(format)) return res.status(400).json({ error: "format is invalid!" })
-
+    const format = req.format
     const teamRankings = await TeamRankingsModel.findOne({ format: format })
+
     res.status(200).json(teamRankings)
   } catch (error) {
     console.log(error)
@@ -16,4 +13,16 @@ const httpGetTeamRankings = async (req, res) => {
   }
 }
 
-module.exports = { httpGetTeamRankings }
+const httpGetPlayerRankings = async (req, res) => {
+  try {
+    const format = req.format
+    const player = req.player
+    const playerRankings = await PlayerRankingsModel.findOne({ format: format, players: player })
+    res.status(200).json(playerRankings)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: "Internal server error!" })
+  }
+}
+
+module.exports = { httpGetTeamRankings, httpGetPlayerRankings }
