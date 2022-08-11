@@ -20,4 +20,4 @@ jobs:
     needs: install
     steps:
       - uses: supercharge/mongodb-github-action@1.6.0
-      - run: npm test
+      - run: npm run test
