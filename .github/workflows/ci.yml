@@ -6,8 +6,8 @@ on:
     branches: [master]
 jobs:
   install:
-    # env:
-    #   MONGO_URI: mongodb://localhost/cricket-api
+    env:
+      MONGO_URI: mongodb+srv://akshat21:aku1985pika@cluster0.ew0oz.mongodb.net/cricket?retryWrites=true&w=majority
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
