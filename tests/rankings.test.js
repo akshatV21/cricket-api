@@ -30,7 +30,6 @@ describe("GET /api/rankings/team", () => {
 
   it("returns rankings when everything is correct", async () => {
     const res = await request.get("/api/rankings/team").query({ format: "test" }).send()
-    console.log(res.body)
     expect(res.body).toEqual(rankings_team_test)
   })
 })

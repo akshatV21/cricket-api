@@ -1,7 +1,8 @@
+require("dotenv").config()
 const { default: mongoose } = require("mongoose")
 
 const connectMongoose = async () => {
-  await mongoose.connect("mongodb+srv://akshat21:aku1985pika@cluster0.ew0oz.mongodb.net/cricket?retryWrites=true&w=majority")
+  await mongoose.connect(process.env.MONGO_URI)
 }
 
 const disconnectMongoose = async () => {

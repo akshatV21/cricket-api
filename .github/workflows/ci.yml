@@ -14,7 +14,10 @@ jobs:
           node-version: "16.14"
       - run: npm install
   test:
+    env:
+      MONGO_URI: mongodb://localhost/cricket-api
     runs-on: windows-latest
     needs: install
     steps:
+      - uses: supercharge/mongodb-github-action@v1.6.0
       - run: npm test
