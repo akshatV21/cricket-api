@@ -19,5 +19,5 @@ jobs:
     runs-on: windows-latest
     needs: install
     steps:
-      - uses: supercharge/mongodb-github-action@v1.6.0
+      - uses: supercharge/mongodb-github-action@1.6.0
       - run: npm test
