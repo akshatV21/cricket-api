@@ -15,5 +15,4 @@ jobs:
         with:
           node-version: "16.14"
       - run: npm install
-      # - uses: supercharge/mongodb-github-action@1.6.0
       - run: npm run test
