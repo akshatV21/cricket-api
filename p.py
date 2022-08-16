@@ -8,3 +8,4 @@ for j in range(randint(1, 10)):
     os.system('git commit -m "code refactoring"')
 
 os.system('git push')
+print("all done")
