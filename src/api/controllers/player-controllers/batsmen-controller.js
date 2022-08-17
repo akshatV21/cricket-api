@@ -10,4 +10,16 @@ const httpGetAllBatsmen = async (req, res) => {
   }
 }
 
-module.exports = { httpGetAllBatsmen }
+const httpGetSingleBatsmen = async (req, res) => {
+  try {
+    const batsmen = await BatsmenModel.findOne({ _id: req.params.batsmenId })
+    if (!batsmen) return res.status(400).json({ error: "Batsmen not found!" })
+
+    res.status(200).json(batsmen)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: "Internal server error!" })
+  }
+}
+
+module.exports = { httpGetAllBatsmen, httpGetSingleBatsmen }
