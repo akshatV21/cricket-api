@@ -21,4 +21,15 @@ const getFormattedTeamsByFormat = (teams, format, record) => {
   return teamsArray
 }
 
-module.exports = { getFormattedTeams, getFormattedTeamsByFormat }
+const getFormattedRecordsArray = (recordList, format, stat) => {
+  const key = format === "all" ? "overallStats" : "stats"
+
+  const finalArray = recordList.map(record => {
+    const { name, team } = record._doc
+    return { name, team, [stat]: record[key][stat] }
+  })
+
+  return finalArray
+}
+
+module.exports = { getFormattedTeams, getFormattedTeamsByFormat, getFormattedRecordsArray }
