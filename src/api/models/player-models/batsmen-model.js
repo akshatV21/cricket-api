@@ -8,6 +8,8 @@ const firstMatchesSchema = {
 const batsmenStatSchema = {
   matchesPlayed: Number,
   totalRuns: Number,
+  average: Number,
+  strikeRate: Number,
   halfCenturies: Number,
   centuries: Number,
   doubleCenturies: Number,
@@ -36,6 +38,31 @@ const batsmenSchema = new Schema(
   },
   { timestamps: true }
 )
+
+// virtuals
+batsmenSchema.virtual("totalMatches").get(function () {
+  return this.stats.odi.matchesPlayed + this.stats.t20i.matchesPlayed + this.stats.test.matchesPlayed
+})
+
+batsmenSchema.virtual("totalRuns").get(function () {
+  return this.stats.odi.totalRuns + this.stats.t20i.totalRuns + this.stats.test.totalRuns
+})
+
+batsmenSchema.virtual("overallAverage").get(function () {
+  return this.stats.odi.average + this.stats.t20i.average + this.stats.test.average
+})
+
+batsmenSchema.virtual("overallStrikeRate").get(function () {
+  return this.stats.odi.strikeRate + this.stats.t20i.strikeRate + this.stats.test.strikeRate
+})
+
+batsmenSchema.virtual("totalFours").get(function () {
+  return this.stats.odi.boundaries.fours + this.stats.t20i.boundaries.fours + this.stats.test.boundaries.fours
+})
+
+batsmenSchema.virtual("totalSixes").get(function () {
+  return this.stats.odi.boundaries.sixes + this.stats.t20i.boundaries.sixes + this.stats.test.boundaries.sixes
+})
 
 // model
 const BatsmenModel = model("batsman", batsmenSchema)
