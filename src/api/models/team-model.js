@@ -12,7 +12,7 @@ const statsSchema = {
   drew: Number,
   tied: Number,
   noResults: Number,
-  bsIndividualTeams: Object,
+  vsIndividualTeams: Object,
 }
 
 // main team schema
