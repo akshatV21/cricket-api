@@ -25,6 +25,7 @@ const httpGetSingleTeamByName = async (req, res) => {
 const httpGetSingleTeamStats = async (req, res) => {
   try {
     const team = await TeamModel.findOne({ countryName: req.params.countryName })
+    if (!team) return res.status(400).json({ error: "Invalid country name!" })
     const teamStats = {}
 
     req.formats.forEach(format => {
