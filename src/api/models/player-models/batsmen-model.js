@@ -64,6 +64,15 @@ batsmenSchema.virtual("totalSixes").get(function () {
   return this.stats.odi.boundaries.sixes + this.stats.t20i.boundaries.sixes + this.stats.test.boundaries.sixes
 })
 
+// methods
+batsmenSchema.methods.findByStat = async function (format, stat) {
+  const batsmen = await this.find()
+
+  if (format === "all") {
+    
+  }
+}
+
 // model
 const BatsmenModel = model("batsman", batsmenSchema)
 

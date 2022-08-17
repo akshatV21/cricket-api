@@ -15,4 +15,8 @@ recordRouter.get("/teams/mostWins", validateFormatParameter, httpGetTeamsWithMos
 recordRouter.get("/teams/mostLosses", validateFormatParameter, httpGetTeamsWithMostLosses)
 recordRouter.get("/teams/earliestTeams", httpGetEarliestTeams)
 
+// player record routes
+// - batsmen
+recordRouter.get("/players/batsmen/mostRuns", validateFormatParameter)
+
 module.exports = recordRouter
