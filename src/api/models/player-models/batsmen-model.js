@@ -40,6 +40,23 @@ const batsmenSchema = new Schema(
   { timestamps: true }
 )
 
+// methods
+batsmenSchema.statics.findByStat = async function (format, stat) {
+  const batsmen = await this.find()
+
+  if (format === "all") {
+    batsmen.sort((a, b) => a.overallStats[stat] - b.overallStats[stat])
+    const finalOutput = getFormattedRecordsArray(batsmen, format, stat)
+    return finalOutput
+  }
+
+  if (format !== "all") {
+    batsmen.sort((a, b) => a.stats[stat] - b.stats[stat])
+    const finalOutput = getFormattedRecordsArray(batsmen, format, stat)
+    return finalOutput
+  }
+}
+
 // virtuals
 batsmenSchema.virtual("overallStats").get(function () {
   return {
@@ -56,23 +73,6 @@ batsmenSchema.virtual("overallStats").get(function () {
     },
   }
 })
-
-// methods
-batsmenSchema.methods.findByStat = async function (format, stat) {
-  const batsmen = await this.find()
-
-  if (format === "all") {
-    batsmen.sort((a, b) => a.overallStats[stat] - b.overallStats[stat])
-    const finalOutput = getFormattedRecordsArray(batsmen, format, stat)
-    return finalOutput
-  }
-
-  if (format !== "all") {
-    batsmen.sort((a, b) => a.stats[stat] - b.stats[stat])
-    const finalOutput = getFormattedRecordsArray(batsmen, format, stat)
-    return finalOutput
-  }
-}
 
 // model
 const BatsmenModel = model("batsman", batsmenSchema)

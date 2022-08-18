@@ -26,7 +26,11 @@ const getFormattedRecordsArray = (recordList, format, stat) => {
 
   const finalArray = recordList.map(record => {
     const { name, team } = record._doc
-    return { name, team, [stat]: record[key][stat] }
+    if (format === "all") {
+      return { name, team, [stat]: record[key][stat] }
+    } else {
+      return { name, team, [stat]: record[key][format][stat] }
+    }
   })
 
   return finalArray

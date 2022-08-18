@@ -1,4 +1,5 @@
 const { Router } = require("express")
+const { httpGetBatsmenByStat } = require("../controllers/record-controllers/player-records/batsmen-records")
 const {
   httpGetTeamsWithMostWins,
   httpGetTeamsWithMostMatches,
@@ -17,6 +18,6 @@ recordRouter.get("/teams/earliestTeams", httpGetEarliestTeams)
 
 // player record routes
 // - batsmen
-recordRouter.get("/players/batsmen/:record", validateFormatParameter)
+recordRouter.get("/players/batsmen/:record", validateFormatParameter, httpGetBatsmenByStat)
 
 module.exports = recordRouter
